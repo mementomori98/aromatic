@@ -10,7 +10,9 @@ main() async {
   print('Server listening on port $port');
 
   var controller = getController();
+  print('Got controller');
   await for (HttpRequest request in server) {
+    print('In the request!');
     print("${request.method} ${request.uri}");
     request.response.headers.contentType =
         new ContentType("text", "html", charset: "utf-8");
