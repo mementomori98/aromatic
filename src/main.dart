@@ -3,7 +3,9 @@ import 'dart:io';
 typedef void Handler(HttpRequest request);
 
 main() async {
-  var server = await HttpServer.bind(InternetAddress.loopbackIPv4, 4040);
+  var portEnv = Platform.environment['PORT'];
+  var port = portEnv == null ? 4040 : int.parse(portEnv);
+  var server = await HttpServer.bind(InternetAddress.loopbackIPv4, port);
 
   var controller = getController();
   await for (HttpRequest request in server) {
